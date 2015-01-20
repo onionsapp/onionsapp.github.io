@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Onions.io</title>
+  <link href="/assets/stylesheets/styles.css" media="all" rel="stylesheet" />
+  <link href="/assets/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+<div class="top_container">
+  <div class="top_divs">
+    <div class="top_left">
+      <img src="/assets/images/phones.png" />
+    </div>
+    <div class="top_right">
+      <div class="logo_box">
+      	<img src="/assets/images/logo.svg" style="width:120px;height:120px;margin-bottom:-10px" />
+        <h1 class="text_shadow">Onions<span class="io">.io</span></h1>
+        <div class="logo_separator"></div>
+        <h3 style="margin:5px 0">Secure Text Storage in the Cloud</h3>
+        <p style="margin: 0 0 10px">Keep your text-based information cryptographically secure. Then read the code to make sure that's true.</p>
+        <div class="logo_separator"></div>
+        <a href="https://itunes.apple.com/us/app/id687296481?mt=8"><%= image_tag('appstore.png', :style => 'margin:20px 0 0') %></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Sign In Security -->
+<div class="med_gray_container" style="padding: 80px 0 40px">
+  <h2 class="light_purple">Security begins before you ever Sign In.</h2>
+  <div style="margin: 60px 0;display: inline-block">
+    <div class="mid_info left">
+       <p class="mid">When you sign up or login, your credentials are never sent directly to the server in plaintext. That would be too easy. We're actually running a recursive <span class="info_demonstration"><a href="http://en.wikipedia.org/wiki/SHA-2">SHA-256</a></span> hash on your username for 15,000 rounds and the same algorithm on your password that's been salted with your username for extra bits of entropy.</p><br><br>
+        <div class="info_demonstration" style="margin: 15px 0;">
+            <pre style="margin:5px 0 7px"><p class="code">username: "Hello"<br>password: "World"</p></pre>
+        </div>
+        <p class="mid">becomes this</p>
+        <div class="info_demonstration" style="margin: 15px 0;">
+            <pre style="margin:5px 0 7px"><p class="code">username: "Hello"<br>password: "WorldHello"</p></pre>
+        </div>
+        <p class="mid">which becomes this</p>
+        <div class="info_demonstration" style="margin: 15px 0;">
+            <pre style="margin:5px 0 7px"><p class="code">username:<br>  "VyijIO3XTijhwjrpuyDNpH<br>  JNpBOBKxwb180lYWbo2YY=w"<br><br>password:<br>  "K/SWeWOeER/zGgOYH8RXv<br>  BuVBzRo+0S3vK6veR/L4ko="</p></pre>
+        </div>
+        <p class="mid">before the server ever gets a chance to see it.</p>
+    </div>
+    <div class="mid_phone right">
+      <%= image_tag('login2.png') %>
+    </div>
+  </div>
+</div>
+
+<!-- Server -->
+<div class="dark_gray_container" style="padding: 80px 0">
+  <h2 class="light_purple">Let's talk about the Server.</h2>
+  <div style="margin: 30px 0 0;display: inline-block">
+    <div style="width: 480px">
+      <p class="mid">There is nothing special about the Server! Onions uses the <span class="info_demonstration"><a href="https://www.parse.com">Parse SDK</a></span> as the backend manager of data, removing many moving parts from the equation. Parse has great uptime, an SSL connection, and a dedicated team to keeping the data managed safely and securely. Parse also has excellent user and authentication management baked in already. So whenever you send the already obfuscated username and password to the server, Parse uses the standard <span class="info_demonstration"><a href="http://en.wikipedia.org/wiki/Bcrypt">bcrypt</a></span> cryptographic protocol to obfuscate the password and provide authentication against it.</p>
+      <h3 style="margin:35px 0 0;font-size: 30px;opacity: 0.5;">Beyond that, the server is just a receiver and a sender. It never manipulates the data.</h3>
+    </div>
+  </div>
+</div>
+
+<!-- Data Security -->
+<div class="med_gray_container" style="padding: 80px 0 40px">
+  <h2 class="light_purple">That's great. But what about my data?</h2>
+  <div style="margin: 60px 0;display:inline-block">
+    <div class="mid_info right">
+      <p class="mid">This is really the most important part, right? Onions uses the best cryptographic encryption scheme available on the iOS platform to ensure data sanctity before being sent across the wire to the server. Onions uses <span class="info_demonstration"><a href="http://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher-block_chaining_.28CBC.29">AES-CBC-256</a></span> encrytpion with an <span class="info_demonstration"><a href="http://en.wikipedia.org/wiki/Hash-based_message_authentication_code">Encrypt-then-HMAC</a></span> authentication scheme to protect your data. Both of these are done and managed by the open source <span class="info_demonstration"><a href="https://github.com/rnapier/RNCryptor">RNCryptor</a></span> library freely available and peer-reviewed on Github. RNCryptor uses industry standard encryption functions like <span class="info_demonstration"><a href="http://en.wikipedia.org/wiki/PBKDF2">PBKDF2</a></span> for key stretching.</p><br><br>
+      <div class="info_demonstration" style="margin: 15px 0;">
+        <pre style="margin:5px 0 7px"><p class="code">Title: "Test Title"<br>Info: "Test Info"</p></pre>
+      </div>
+      <p class="mid">becomes this</p>
+      <div class="info_demonstration" style="margin: 15px 0;">
+        <pre style="margin:5px 0 7px"><p class="code">Title: <br>  "AgFN8fBcFW4GucQ/GcTBMAAnawau9mYoC+<br>  NIqI4NlpJ3jMCsXxH59hKP5/eidXI/<br>  9EvuEaGYKXfEZDf1TWdX8L8ETU0<br>  Jh55BWGU556vSQgM3AA=="<br><br>Info:<br>  "AgF7V0dyTYPO647HhhrW83OdmfwN71Gku<br>  Hgb+sf/yb1vyDVSIAU1bmWTJpgb8Oh<br>  b0HvEysqgopLqVzqxOGbiM2areY<br>  xVW9SuLpEoUqF5498c0Q=="</p></pre>
+      </div>
+      <p class="mid">before the server ever gets a chance to see it.</p>
+    </div>
+    <div class="mid_phone left">
+      <%= image_tag('data.png') %>
+    </div>
+  </div>
+</div>
+
+<!-- Open Source -->
+<div class="dark_gray_container" style="padding: 80px 0">
+  <h2 class="light_purple">Read the code, and contribute.</h2>
+  <div style="margin: 30px 0 0;display: inline-block">
+    <div style="width: 480px">
+      <p class="mid">The entire iOS project is open-sourced on <span class="info_demonstration"><a href="https://github.com/onionsapp/Onions-iOS">Github</a></span> for you to read and contribute to its success. Don't be afraid to open a pull-request if you see things that should change or might be better a different way.</p>
+      <h3 style="margin:35px 0 0;font-size: 30px;opacity: 0.5;">Don't take my word on the security. Read the code; believe with your eyes.</h3>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="fixed_footer">
+  <div class="left" style="margin:13px 15px 0">
+    <p>
+    <img src="/assets/images/logo.svg" style="width:25px;height:25px;" /></p>
+  </div>
+  <div class="right" style="margin:17px 25px 0">
+    <pre style="margin:0;padding:0"><p><a href="mailto:onionsapp@yahoo.com">Support</a><span class="io">  |  </span><a href="https://itunes.apple.com/us/app/id687296481?mt=8">Download</a></p></pre>
+  </div>
+</div>
+
+<!-- Google Analytics -->
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-45916510-1', 'onions.io');
+    ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>
